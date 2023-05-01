@@ -50,9 +50,9 @@ function operate(num1, operator, num2) {
 
 function appendNumber(number) {
   if (number === '.' && currentOutput.textContent.includes('.')) return;
+  
   if (currentOutput.textContent === '0' && !(number === '.')) {
     currentOutput.textContent = number;
-    console.log('called');
   }
   else {
     currentOutput.textContent += number;
@@ -66,3 +66,4 @@ numberBtns.forEach(button => {
 });
 
 allClearBtn.addEventListener('click', clear);
+deleteBtn.addEventListener('click', () => currentOutput.textContent = currentOutput.textContent.slice(0, -1));
