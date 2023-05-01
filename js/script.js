@@ -32,7 +32,7 @@ function clear() {
   operand2 = '';
   operator = null;
   previousOutput.textContent = '';
-  currentOutput.textContent = '';
+  currentOutput.textContent = '0';
 }
 
 function operate(num1, operator, num2) {
@@ -50,7 +50,13 @@ function operate(num1, operator, num2) {
 
 function appendNumber(number) {
   if (number === '.' && currentOutput.textContent.includes('.')) return;
-  currentOutput.textContent += number;
+  if (currentOutput.textContent === '0' && !(number === '.')) {
+    currentOutput.textContent = number;
+    console.log('called');
+  }
+  else {
+    currentOutput.textContent += number;
+  }
 }
 
 numberBtns.forEach(button => {
