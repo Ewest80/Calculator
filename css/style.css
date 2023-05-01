@@ -7,8 +7,14 @@
   --btn-shadow: #080808;
   --display-clr: #111111;
   --operator-clr: #d49218;
+  --operator-hover: #b47d17;
+  --operator-active: #a57315;
   --number-clr: #585858;
+  --number-hover: #464646;
+  --number-active: #3d3d3d;
   --del-clr: #888888;
+  --del-hover: #727272;
+  --del-active: #666666;
 }
 
 *, ::before, ::after {
@@ -53,7 +59,7 @@ body {
   height: 6.25rem;
   background-color: var(--display-clr);
   color: #fff;
-  box-shadow: inset 2px 2px 10px var(--dark-shadow)
+  box-shadow: inset 2px 2px 10px var(--dark-shadow);
 }
 
 .output .previous-output {
@@ -62,6 +68,7 @@ body {
 
 .output .current-output {
   font-size: 2.5rem;
+  
 }
 
 .calculator .button-grid {
@@ -84,12 +91,36 @@ body {
   box-shadow: 3px 3px 5px var(--btn-shadow);
 }
 
+.button-grid .btn:hover {
+  background-color: var(--number-hover);
+}
+
+.button-grid .btn:active {
+  background-color: var(--number-active);
+  transform: translateY(2px);
+}
+
 .button-grid .btn-operator {
   background-color: var(--operator-clr);
 }
 
+.button-grid .btn-operator:hover {
+  background-color: var(--operator-hover);
+}
+
+.button-grid .btn-operator:active {
+  background-color: var(--operator-active);
+}
+
 .button-grid .btn-del {
   background-color: var(--del-clr);
+}
+
+.button-grid .btn-del:hover {
+  background-color: var(--del-hover);
+}
+.button-grid .btn-del:active {
+  background-color: var(--del-active);
 }
 
 .button-grid .span-2 {
