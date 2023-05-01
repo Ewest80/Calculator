@@ -1,5 +1,14 @@
 :root {
-  
+  --background-clr: #f6f6f6;
+  --calculator-clr: #2b2a2a;
+  --border-clr: #000000;
+  --light-shadow: #333333;
+  --dark-shadow: #000000;
+  --btn-shadow: #080808;
+  --display-clr: #111111;
+  --operator-clr: #d49218;
+  --number-clr: #585858;
+  --del-clr: #888888;
 }
 
 *, ::before, ::after {
@@ -11,6 +20,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
+  background-color: var(--background-clr);
 }
 
 .main {
@@ -24,9 +34,11 @@ body {
 
 .calculator {
   width: 25rem;
-  border: 2px solid #000;
+  border: 2px solid var(--border-clr);
   border-radius: 1.25rem;
   padding: 1.25rem;
+  background-color: var(--calculator-clr);
+  box-shadow: 10px 10px 20px var(--light-shadow);
 }
 
 .calculator .output {
@@ -34,11 +46,14 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  border: 2px solid #000;
+  border: 2px solid var(--border-clr);
   border-radius: .5rem;
   margin-bottom: 2rem;
   padding: 5px 10px;
   height: 6.25rem;
+  background-color: var(--display-clr);
+  color: #fff;
+  box-shadow: inset 2px 2px 10px var(--dark-shadow)
 }
 
 .output .previous-output {
@@ -62,8 +77,19 @@ body {
   cursor: pointer;
   font-size: 2rem;
   outline: none;
-  border: 2px solid #000;
+  border: 2px solid var(--border-clr);
   border-radius: .25rem;
+  background-color: var(--number-clr);
+  color: #fff;
+  box-shadow: 3px 3px 5px var(--btn-shadow);
+}
+
+.button-grid .btn-operator {
+  background-color: var(--operator-clr);
+}
+
+.button-grid .btn-del {
+  background-color: var(--del-clr);
 }
 
 .button-grid .span-2 {
