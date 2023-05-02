@@ -27,6 +27,7 @@ function divide(num1, num2) {
   return num1 / num2;
 }
 
+// Clear all fields
 function clear() {
   operand1 = '';
   operand2 = '';
@@ -36,6 +37,9 @@ function clear() {
 }
 
 function operate(num1, operator, num2) {
+  num1 = Number(num1);
+  num2 = Number(num2);
+
   switch (operator) {
     case '+':
       return add(num1, num2);
@@ -43,12 +47,18 @@ function operate(num1, operator, num2) {
       return subtract(num1, num2);
     case '*':
       return multiply(num1, num2);
-    case '÷':
+    case '/':
+      if (num2 === 0) return null;
       return divide(num1, num2);
   }
 }
 
+function notValid() {
+  return isNaN(currentOutput.textContent) && !(currentOutput.textContent === '.');
+}
+
 function appendNumber(number) {
+  if (notValid()) return;
   if (number === '.' && currentOutput.textContent.includes('.')) return;
   
   if (currentOutput.textContent === '0' && !(number === '.')) {
@@ -59,11 +69,45 @@ function appendNumber(number) {
   }
 }
 
+function setOperator(newOperator) {
+  if (notValid()) return;
+  if (currentOutput.textContent != '') {
+    if (operator !== null) calculate();
+    operand1 = currentOutput.textContent;
+    operator = newOperator;
+    previousOutput.textContent = `${operand1} ${operator}`
+    currentOutput.textContent = '';
+  }
+}
+
+function calculate() {
+  if (operator === null || notValid() || currentOutput.textContent === '') return;
+  if (currentOutput.textContent === '0' && operator === '/') {
+    previousOutput.textContent = 'WHY!?! ... Press AC';
+    currentOutput.textContent = 'BOOM!';
+    return;
+  }
+  operand2 = currentOutput.textContent;
+  currentOutput.textContent = Math.round(operate(operand1, operator, operand2) * 1000) / 1000;
+  previousOutput.textContent = `${operand1} ${operator} ${operand2} =`;
+  operator = null;
+}
+
 numberBtns.forEach(button => {
   button.addEventListener('click', () => {
     appendNumber(button.textContent);
   });
 });
 
+operatorBtns.forEach(button => {
+  button.addEventListener('click', () => {
+    setOperator(button.textContent);
+  });
+});
+
+equalsBtn.addEventListener('click', calculate);
 allClearBtn.addEventListener('click', clear);
-deleteBtn.addEventListener('click', () => currentOutput.textContent = currentOutput.textContent.slice(0, -1));
+deleteBtn.addEventListener('click', () => {
+  if (notValid()) return;
+  currentOutput.textContent = currentOutput.textContent.slice(0, -1)
+});
